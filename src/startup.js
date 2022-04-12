@@ -37,7 +37,6 @@ export async function main(ns) {
 	}
 
 	// Run NUKE.exe on all t1 servers that I am able to hack.
-	// TODO - Rename all this as I'm not just Nuking anymore.
 
 	t1.forEach(tryNuke)
 

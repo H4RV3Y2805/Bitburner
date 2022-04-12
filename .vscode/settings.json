@@ -14,7 +14,7 @@
     "bitburner.scriptRoot": "./src/",
 
     // Autosave Settings
-    "files.autoSave": "off",
+    "files.autoSave": "afterDelay",
 
     // Autosnippet settings
     "autoSnippet.snippets": [
