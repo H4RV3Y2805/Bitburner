@@ -3,9 +3,15 @@ export async function main(ns) {
 
 	// Make sure I'm in the home directory.
 
-	// Run Scan to get a list of all Tier 1 servers and add to an array called t1.
+	// Scan server.
 
-	let t1 = ns.scan('home');
+	let servers = ns.scan('home');	
+	
+	function serverScan (servers) {
+		for (let i = 0; i < servers.length; i++) {
+			servers.push(ns.scan(servers[i]));
+		}
+	}
 
 	// Get my Port Level
 
@@ -44,6 +50,21 @@ export async function main(ns) {
 		if (ns.hasRootAccess(host) == false) {
 			if (ns.getHackingLevel() >= ns.getServerRequiredHackingLevel(host)) {
 				if (ns.getServerNumPortsRequired(host) <= portLevel) {
+					if (ns.fileExists("brutessh.exe", "home")) {
+						ns.brutessh(host)
+					}
+					if (ns.fileExists("ftpcrack.exe", "home")) {
+						ns.ftpcrack(host)
+					}
+					if (ns.fileExists("relaysmtp.exe", "home")) {
+						ns.relaysmtp(host)
+					}
+					if (ns.fileExists("httpworm.exe", "home")) {
+						ns.httpworm(host)
+					}
+					if (ns.fileExists("sqlinject.exe", "home")) {
+						ns.sqlinject(host)
+					}
 					ns.nuke(host)
 					ns.tprint("We now have root access to: " + host)
 				}
