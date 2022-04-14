@@ -12,6 +12,7 @@ export async function main(ns) {
 			servers.push(ns.scan(servers[i]));
 		}
 	}
+	
 
 	// Get my Port Level
 
