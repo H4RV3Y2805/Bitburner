@@ -3,16 +3,26 @@ export async function main(ns) {
 
 	// Make sure I'm in the home directory.
 
-	// Scan server.
+	// Get base list of servers.
+	const allServers = ns.scan('home');
 
-	let servers = ns.scan('home');	
-	
-	function serverScan (servers) {
-		for (let i = 0; i < servers.length; i++) {
-			servers.push(ns.scan(servers[i]));
+	// Now we need to loop through the array of servers and scan each one.
+
+	for (let i = 0; i < allServers.length; i++) {
+		// Scan each server.
+		let foundServer = ns.scan(allServers[i]);
+		// Remove the parent server from the array.
+		foundServer.splice(0, 1);
+		// If the resulting arrays length is greater than 1 (meaning it can see another tier of server) 
+		if (foundServer.length > 0) {
+			// Add each item in the array to the allServers array if it doesn't already exist.
+			for (let j = 0; j < foundServer.length; j++) {
+				if (allServers.indexOf(foundServer[j]) == -1) {
+					allServers.push(foundServer[j]);
+				}
+			}
 		}
 	}
-	
 
 	// Get my Port Level
 
@@ -45,7 +55,7 @@ export async function main(ns) {
 
 	// Run NUKE.exe on all t1 servers that I am able to hack.
 
-	t1.forEach(tryNuke)
+	allServers.forEach(tryNuke)
 
 	function tryNuke(host) {
 		if (ns.hasRootAccess(host) == false) {
@@ -77,11 +87,15 @@ export async function main(ns) {
 	// Check RAM to determine threads
 	// Run hack script with n threads
 
-	for (let host of t1) {
+	for (let host of allServers) {
 		if (ns.hasRootAccess(host) == true) {
-			await ns.scp("early-hack-template.js", "home", host)
+			ns.killall(host)
 			let threads = threadCheck(host)
-			ns.exec("early-hack-template.js", host, threads)
+			if (threads > 0) {
+				await ns.scp("early-hack-template.js", "home", host)
+				ns.exec("early-hack-template.js", host, threads)
+			}
+
 		}
 	}
 
