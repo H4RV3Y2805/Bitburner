@@ -8,10 +8,10 @@ export async function main(ns: NS): Promise<void> {
 
   function threadCheck(host: string) {
     const freeRAM = ns.getServerMaxRam(host) - 20 - ns.getServerUsedRam(host);
-    const scriptRAM = ns.getScriptRam("early-hack-template.js", host);
+    const scriptRAM = ns.getScriptRam("/starter_scripts/early-hack-template.js", host);
     const scriptThreads = Math.floor(freeRAM / scriptRAM);
     return scriptThreads;
   }
 
-  ns.exec("early-hack-template.js", host, threads, scriptArgs);
+  ns.exec("/starter_scripts/early-hack-template.js", host, threads, scriptArgs);
 }

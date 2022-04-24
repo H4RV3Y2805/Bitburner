@@ -98,8 +98,8 @@ export async function main(ns : NS) : Promise<void> {
 			ns.killall(host)
 			const threads = threadCheck(host)
 			if (threads > 0) {
-				await ns.scp("early-hack-template.js", "home", host)
-				ns.exec("early-hack-template.js", host, threads, target)
+				await ns.scp("/starter_scripts/early-hack-template.js", "home", host)
+				ns.exec("/starter_scripts/early-hack-template.js", host, threads, target)
 			}
 
 		}
@@ -107,7 +107,7 @@ export async function main(ns : NS) : Promise<void> {
 
 	function threadCheck(host: string) {
 		const freeRAM = ns.getServerMaxRam(host) - ns.getServerUsedRam(host)
-		const scriptRAM = ns.getScriptRam("early-hack-template.js", "home")
+		const scriptRAM = ns.getScriptRam("/starter_scripts/early-hack-template.js", "home")
 		const scriptThreads = Math.floor(freeRAM / scriptRAM)
 		return scriptThreads
 	}
