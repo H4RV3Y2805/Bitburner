@@ -4,6 +4,7 @@ export async function main(ns) {
     let mode = ns.args[0]
 
     // Check how many servers I already have purchased.
+    // Something
 
     let purchasedServers = ns.getPurchasedServers();
     let purchasedServersCount = purchasedServers.length;
