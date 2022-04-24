@@ -1,7 +1,7 @@
 /** @param {NS} ns */
 export async function main(ns) {
 
-	// Make sure I'm in the home directory.
+	let scriptArgs = ns.args[0];
 
 	// Get base list of servers.
 	const allServers = ns.scan('home');
@@ -23,6 +23,8 @@ export async function main(ns) {
 			}
 		}
 	}
+
+	ns.tprint("All servers: " + allServers);
 
 	// Get my Port Level
 
@@ -93,7 +95,7 @@ export async function main(ns) {
 			let threads = threadCheck(host)
 			if (threads > 0) {
 				await ns.scp("early-hack-template.js", "home", host)
-				ns.exec("early-hack-template.js", host, threads)
+				ns.exec("early-hack-template.js", host, threads, scriptArgs)
 			}
 
 		}
@@ -101,7 +103,7 @@ export async function main(ns) {
 
 	function threadCheck(host) {
 		let freeRAM = ns.getServerMaxRam(host) - ns.getServerUsedRam(host)
-		let scriptRAM = ns.getScriptRam("early-hack-template.js", host)
+		let scriptRAM = ns.getScriptRam("early-hack-template.js", "home")
 		let scriptThreads = Math.floor(freeRAM / scriptRAM)
 		return scriptThreads
 	}

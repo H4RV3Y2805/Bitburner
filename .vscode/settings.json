@@ -11,7 +11,7 @@
     "typescript.preferences.importModuleSpecifier": "non-relative",
 
     // Bitburner Extension Settings
-    "bitburner.scriptRoot": "./src/",
+    "bitburner.scriptRoot": "./dist/",
 
     // Autosave Settings
     "files.autoSave": "afterDelay",

@@ -1,7 +1,7 @@
 /** @param {NS} ns */
 export async function main(ns) {
 
-	var target = "joesguns";
+	var target = ns.args[0];
 	var moneyThresh = ns.getServerMaxMoney(target) * 0.80;
 	var securityThresh = ns.getServerMinSecurityLevel(target) + 5;
 
