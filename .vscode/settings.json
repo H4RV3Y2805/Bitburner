@@ -18,6 +18,7 @@
 
     // Autosnippet settings
     "autoSnippet.snippets": [
+    
         {
             "pattern": "**/*.ts", 
             "snippet": "ns-template"
