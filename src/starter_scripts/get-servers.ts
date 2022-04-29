@@ -4,26 +4,36 @@ export async function main(ns: NS): Promise<void> {
   // Define the column layout.
 
   ns.tprint("\n\n");
-  const row = "%-20s | %-20s | %8s | %12s | %12s | %12s | %12s ";
+  const row = "| %-20s | %-20s | %3s | %5s | %3s | %6s | %10s |";
+  ns.tprintf(
+    row,
+    "-------------------",
+    "-------------------",
+    "---",
+    "-----",
+    "---",
+    "------",
+    "----------"
+  );
   ns.tprintf(
     row,
     "Server",
     "Parent",
-    "Rooted",
-    "Hack Lvl",
-    "Ports",
+    "Rtd",
+    "H-Lvl",
+    "Pts",
     "RAM",
     "Max Money"
   );
   ns.tprintf(
     row,
-    "-------",
-    "-------",
-    "-------",
-    "-------",
-    "-------",
-    "-------",
-    "-------"
+    "-------------------",
+    "-------------------",
+    "---",
+    "-----",
+    "---",
+    "------",
+    "----------"
   );
 
   // Loop through our servers and print out their information.
@@ -57,7 +67,7 @@ export async function main(ns: NS): Promise<void> {
       row,
       thisServer,
       parentServer,
-      rooted,
+      rooted? "Yes" : "No",
       hackingLevel,
       portsRequired,
       ram,
