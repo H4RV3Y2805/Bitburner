@@ -4,7 +4,7 @@ export async function main(ns: NS): Promise<void> {
   // Define the column layout.
 
   ns.tprint("\n\n");
-  const row = "| %-20s | %-20s | %3s | %5s | %3s | %6s | %10s |";
+  const row = "| %-20s | %-20s | %3s | %5s | %3s | %6s | %10s | %10s |";
   ns.tprintf(
     row,
     "-------------------",
@@ -13,6 +13,7 @@ export async function main(ns: NS): Promise<void> {
     "-----",
     "---",
     "------",
+    "----------",
     "----------"
   );
   ns.tprintf(
@@ -23,7 +24,8 @@ export async function main(ns: NS): Promise<void> {
     "H-Lvl",
     "Pts",
     "RAM",
-    "Max Money"
+    "Avail $$$",
+    "Max $$$"
   );
   ns.tprintf(
     row,
@@ -33,6 +35,7 @@ export async function main(ns: NS): Promise<void> {
     "-----",
     "---",
     "------",
+    "----------",
     "----------"
   );
 
@@ -57,9 +60,10 @@ export async function main(ns: NS): Promise<void> {
       ns.getServerMaxRam(allServers[i]) * 1000 * 1000 * 1000,
       "0 b"
     );
+    const availableMoney = ns.nFormat(ns.getServerMoneyAvailable(allServers[i]), "($0.00a)");
     const maxMoney = ns.nFormat(
       ns.getServerMaxMoney(allServers[i]),
-      "($ 0.00 a)"
+      "($0.00a)"
     );
 
     // Add the data to the server table.
@@ -71,6 +75,7 @@ export async function main(ns: NS): Promise<void> {
       hackingLevel,
       portsRequired,
       ram,
+      availableMoney,
       maxMoney
     );
 
