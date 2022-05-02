@@ -4,12 +4,13 @@ export async function main(ns: NS): Promise<void> {
   // Define the column layout.
 
   ns.tprint("\n\n");
-  const row = "| %-20s | %-20s | %3s | %5s | %3s | %6s | %10s | %10s |";
+  const row = "| %-20s | %-20s | %3s | %5s | %5s | %3s | %6s | %10s | %10s |";
   ns.tprintf(
     row,
     "-------------------",
     "-------------------",
     "---",
+    "-----",
     "-----",
     "---",
     "------",
@@ -22,6 +23,7 @@ export async function main(ns: NS): Promise<void> {
     "Parent",
     "Rtd",
     "H-Lvl",
+    "S-Lvl",
     "Pts",
     "RAM",
     "Avail $$$",
@@ -32,6 +34,7 @@ export async function main(ns: NS): Promise<void> {
     "-------------------",
     "-------------------",
     "---",
+    "-----",
     "-----",
     "---",
     "------",
@@ -55,6 +58,7 @@ export async function main(ns: NS): Promise<void> {
     // Initialize the output variables.
     const rooted = ns.hasRootAccess(allServers[i]);
     const hackingLevel = ns.getServerRequiredHackingLevel(allServers[i]);
+    const securityLevel = ns.getServerMinSecurityLevel(allServers[i]);
     const portsRequired = ns.getServerNumPortsRequired(allServers[i]);
     const ram = ns.nFormat(
       ns.getServerMaxRam(allServers[i]) * 1000 * 1000 * 1000,
@@ -73,6 +77,7 @@ export async function main(ns: NS): Promise<void> {
       parentServer,
       rooted? "Yes" : "No",
       hackingLevel,
+      securityLevel,
       portsRequired,
       ram,
       availableMoney,
