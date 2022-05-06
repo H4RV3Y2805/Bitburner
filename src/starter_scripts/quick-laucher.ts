@@ -3,6 +3,8 @@ import { NS } from "@ns";
 export async function main(ns: NS): Promise<void> {
   const scriptArgs = String(ns.args[0]);
 
+  ns.killall();
+
   const host = ns.getHostname();
   const threads = threadCheck(host);
 
