@@ -28,7 +28,7 @@ export async function main(ns : NS) : Promise<void> {
 
     // Print out our list of servers.
 
-    ns.tprint("All servers: " + allServers);
+    // ns.tprint("All servers: " + allServers);
 
     // Get my Port Level
 
