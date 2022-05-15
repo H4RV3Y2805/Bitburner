@@ -56,9 +56,14 @@ export async function main(ns : NS) : Promise<void> {
 
         // Thread Data:
 
+        let currentMoney = ns.getServerMoneyAvailable(target);
+        if (currentMoney <= 0) currentMoney = 1;
+        const serverObject = ns.getServer("home");
+        const coresAvailable = serverObject.cpuCores
+
         ns.printf(row, "-------------------------", "------------------------------");
         ns.printf(row, "Hack Threads", Math.ceil(ns.hackAnalyzeThreads(target, ns.getServerMaxMoney(target))));
-        ns.printf(row, "Grow Threads", Math.ceil(ns.growthAnalyze(target, (ns.getServerMaxMoney(target) / ns.getServerMoneyAvailable(target)))));
+        ns.printf(row, "Grow Threads", Math.ceil(ns.growthAnalyze(target, (ns.getServerMaxMoney(target) / currentMoney), coresAvailable)));
         ns.printf(row, "Weaken Threads", Math.ceil((ns.getServerSecurityLevel(target) - ns.getServerMinSecurityLevel(target)) / 0.05));        
 
         // Footer:
