@@ -40,7 +40,7 @@ export async function main(ns : NS) : Promise<void> {
         }
         // Hack
         else {
-            const hackThreadsRequired = Math.ceil(ns.hackAnalyzeThreads(target, ns.getServerMaxMoney(target)));
+            const hackThreadsRequired = Math.ceil(ns.hackAnalyzeThreads(target, (ns.getServerMaxMoney(target) * 0.9)));
             const hackThreadsAvailable = Math.floor(((ns.getServerMaxRam("home") - ns.getServerUsedRam("home")) / ns.getScriptRam("/batching/hack.js", "home")));
             let actualHackThreads = 0;
             if (hackThreadsRequired > hackThreadsAvailable) {
